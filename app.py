@@ -35,7 +35,9 @@ def candidate_elimination(data):
     return specific_h, general_h
 
 def main():
-    st.title("Candidate Elimination Algorithm")
+    st.title("""Candidate Elimination Algorithm
+    Team - Binary Brains
+    Contributers - Nagaroshan,Monack,Naviya""")
 
     st.write("Upload your dataset (CSV format):")
     uploaded_file = st.file_uploader("Choose a file")
