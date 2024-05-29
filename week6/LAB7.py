@@ -8,9 +8,8 @@ from pgmpy.inference import VariableElimination
 st.title("COVID-19 Bayesian Inference")
 
 # Load the dataset
-data_path = 'corona.csv'  # Adjust the path if necessary
+data_path = 'C:/Users/naviy/Desktop/week6/corono.csv'  # Adjust the path if necessary
 data = pd.read_csv(data_path)
-
 
 # Display the first few rows of the dataset to ensure it's loaded correctly
 st.write("Dataset loaded successfully:")
@@ -36,10 +35,10 @@ st.write("Performing inference setup...")
 infer = VariableElimination(model)
 st.write("Inference setup complete.")
 
-# Set evidence values (example values; can be customized or parameterized)
-new_cases = 1
-new_deaths = 0
-new_recovered = 0
+# Set evidence values (these can be customized via Streamlit input widgets)
+new_cases = st.number_input('New cases', min_value=0, max_value=int(data['New cases'].max()), value=1)
+new_deaths = st.number_input('New deaths', min_value=0, max_value=int(data['New deaths'].max()), value=0)
+new_recovered = st.number_input('New recovered', min_value=0, max_value=int(data['New recovered'].max()), value=0)
 
 # Perform the query
 st.write("Performing the query with the provided evidence...")
