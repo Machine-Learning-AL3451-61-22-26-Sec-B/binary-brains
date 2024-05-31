@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 
 class NeuralNetwork:
-    def _init_(self, input_size, hidden_size, output_size):
+    def __init__(self, input_size, hidden_size, output_size):
         self.input_size = input_size
         self.hidden_size = hidden_size
         self.output_size = output_size
@@ -39,9 +39,9 @@ class NeuralNetwork:
         
         # Update weights and biases
         self.weights_hidden_output += self.hidden_output.T.dot(output_delta) * learning_rate
-        self.bias_output += np.sum(output_delta) * learning_rate
+        self.bias_output += np.sum(output_delta, axis=0) * learning_rate
         self.weights_input_hidden += X.T.dot(hidden_delta) * learning_rate
-        self.bias_hidden += np.sum(hidden_delta) * learning_rate
+        self.bias_hidden += np.sum(hidden_delta, axis=0) * learning_rate
     
     def train(self, X, y, epochs, learning_rate):
         for _ in range(epochs):
@@ -70,7 +70,7 @@ def main():
     st.write("Testing the trained neural network:")
     for i in range(len(X)):
         prediction = nn.feedforward(X[i])
-        st.write(f"Input: {X[i]}, Predicted Output: {prediction}")
+        st.write(f"Input: {X[i]}, Predicted Output: {prediction[0]}")
 
 if __name__ == "__main__":
     main()
